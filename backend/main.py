@@ -23,6 +23,10 @@ def home():
 def usersignup():
     return render_template("usersignup.html")
 
+@app.route("/userlogin")
+def userlogin():
+    return render_template("userlogin.html")
+
 #testing whether db is connected or not
 @app.route("/test")
 def test():
