@@ -6,7 +6,8 @@
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
-        <form action="" method="post">
+        <form action="/login" method="post">
+            {% include "message.html" %}
             <div class="form-group">
                 <input type="text" class="form-control mt-2" placeholder="Enter the SRF ID" name="srf" required>
             </div>
@@ -17,7 +18,7 @@
             <button type="submit" class="btn btn-info">Login</button>
             </form>
             <br>
-            New user? <a class="text-blue" href="/usersignup">Sign Up</a> 
+            New user? <a class="text-blue" href="/signup">Sign Up</a> 
     </div>
     <div class="col-md-4"></div>
 </div>
