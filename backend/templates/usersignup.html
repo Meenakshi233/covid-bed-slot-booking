@@ -2,12 +2,11 @@
 {% block title %} User SignUp {% endblock title %}
 {% block form %}  
 <h2> Sign UP</h2>
-{% include "message.html" %}
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
         <form action="/signup" method="post">
-          
+            {% include "message.html" %}
             <div class="form-group">
                 <input type="text" class="form-control mt-2" placeholder="Enter the SRF ID" name="srf" required>
             </div>

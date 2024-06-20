@@ -1,0 +1,84 @@
+{% extends "navbar.html" %}
+{% block title %} Add Hospital Data {% endblock title %}
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container" mt-4>
+    <div class="display-4 text-center text-info">Add Hospital Data</div>
+    <br>
+    <div class="row">
+        <div class="col-md-5">
+           
+            <div class="card">
+                {% include "message.html" %}
+                <h4 class="text-center">Covid Care Centre</h4>
+                <div class="card-body bg-light">
+                    <form action="/addhospitalinfo" method="post">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="hcode" placeholder="Enter the hospital code" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="hname" placeholder="Enter the hospital name" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="number" class="form-control" name="normalbed" placeholder="Enter number of normal beds available" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="number" class="form-control" name="hicubed" placeholder="Enter number of H.I.C.U beds available" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="number" class="form-control" name="icubed" placeholder="Enter number of I.C.U beds available" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="number" class="form-control" name="ventbed" placeholder="Enter number of Ventilator beds available" required>
+                        </div>
+                        <br><br>
+                        <button class="btn btn-info" type="submit">Add</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-3" >
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img src="../../static/assets/img/bedimg2.jpg" class="img-fluid rounded-start" alt="..." style="width: 600px; height: 500px;">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body bg-dark">
+                      <h4 class="card-title text-center bg-light">Hospital Data</h4><br>
+                      <div class="card bg-dark" style="width: 24rem;">
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">Hospital Code: <b>{{postsdata.hcode}}</b></li>
+                          <li class="list-group-item">Hospital Name: <b>{{postsdata.hname}}</b></li>
+                          <li class="list-group-item">Number of Normal beds available: <b>{{postsdata.normalbed}}</b></li>
+                          <li class="list-group-item">Number of H.I.C.U beds available: <b>{{postsdata.hicubed}}</b></li>
+                          <li class="list-group-item">Number of I.C.U beds available: <b>{{postsdata.icubed}}</b></li>
+                          <li class="list-group-item">Number of Ventilator beds available: <b>{{postsdata.vbed}}</b></li>
+                        </ul><br>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Edit : <a href="/hedit/{{postsdata.id}}"><i class="fa-solid fa-pen-to-square"></i></a></li>
+                            <li class="list-group-item">Delete : <a href="/hdelete/{{postsdata.id}}"><i class="fa-solid fa-trash"></i></a></li>                           
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                  </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock body %}
