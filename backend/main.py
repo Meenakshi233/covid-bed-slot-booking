@@ -6,9 +6,9 @@ from flask.helpers import url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash,check_password_hash
+import logging
 
 from flask_login import login_required,logout_user,login_user,login_manager,LoginManager,current_user
-from flask_login import current_user, login_required
 import json
 
 import os
@@ -16,11 +16,13 @@ from flask_mail import Mail
 
 # database connection
 local_server = True
-app = Flask(__name__,
-            static_folder='static',
-            template_folder='templates')
+app = Flask(__name__,static_folder='static',template_folder='templates')
 app.secret_key = "hemmee"
   
+
+# Configure logging
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 
 #app.config['SQLALCHEMY_DATABASE_URI']= "mysql://username:password@localhost/databasename"
@@ -331,6 +333,17 @@ def hdelete(id):
         db.session.rollback()  # Roll back the changes on error
         flash(f"Failed to delete data: {e}", "danger")
     return redirect(url_for('addhospitalinfo')) 
+
+
+@app.route("/pdetails", methods=['GET'])
+# @login_required
+def pdetails():
+    code=current_user.srfid
+    data=Bookingpatient.query.filter_by(srfid=code).first()
+
+    return render_template("details.html",data=data)
+
+
 
 @app.route("/slotbooking", methods=['POST','GET'])
 @login_required

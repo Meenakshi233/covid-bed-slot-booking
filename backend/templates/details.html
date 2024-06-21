@@ -1,0 +1,25 @@
+{% extends 'baselogin.html' %}
+{% block title %} Patient Details {% endblock title %}
+{% block form %} 
+<h2>Patient Details</h2>
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+       <h1>Patient Details</h1>
+       {% if data %}
+       <p>SRF ID: {{ data.srfid }}</p>
+       <p>Bed Type: {{ data.bedtype }}</p>
+       <p>Hospital Code: {{ data.hcode }}</p>
+       <p>SPO2: {{ data.spo2 }}</p>
+       <p>Patient Name: {{ data.pname }}</p>
+       <p>Patient Phone: {{ data.pphone }}</p>
+       <p>Patient Address: {{ data.paddress }}</p>
+       {% else %}
+       <p>No details available.</p>
+       {% endif %}
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+ {% endblock form%}
