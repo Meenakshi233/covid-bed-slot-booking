@@ -2,14 +2,14 @@
 {% block title %} Slot Booking {% endblock title %}
 {% block body %}<br><br><br><br><br><br>
 <div class="container" mt-4>
-    <div class="display-4 text-center text-info">Book your Bed Slot</div>
+    <div class="display-4 text-center text-info"><b>Book your Bed Slot</b></div>
     <br>
     <div class="row">
         <div class="col-md-4">
            
             <div class="card">
                 {% include "message.html" %}
-                <h4 class="text-center">Covid Care Centre</h4>
+                <h4 class="text-center text-white bg-dark">Covid Care Centre</h4>
                 <div class="card-body bg-light">
                     <form action="/slotbooking" method="post">
                         <div class="form-group">
@@ -38,7 +38,10 @@
                             <input type="text" class="form-control mt-2" name="paddress" placeholder="Enter Patient Address" required>
                         </div>
                         <br>
-                        <button class="btn btn-info" type="submit">Book Now</button>
+                        <div class="text-center"> <!-- Center aligns the button -->
+                            <button class="btn btn-info" type="submit">Book Now</button>
+                          </div>
+                        <!-- <button class="btn btn-info" type="submit">Book Now</button> -->
                     </form>
                 </div>
             </div>

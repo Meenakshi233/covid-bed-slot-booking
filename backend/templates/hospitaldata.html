@@ -8,41 +8,42 @@
 <br>
 <br>
 <div class="container" mt-4>
-    <div class="display-4 text-center text-info">Add Hospital Data</div>
+    <div class="display-4 text-center text-info"><b>Add Hospital Data</b></div>
     <br>
     <div class="row">
         <div class="col-md-5">
            
             <div class="card">
                 {% include "message.html" %}
-                <h4 class="text-center">Covid Care Centre</h4>
-                <div class="card-body bg-light">
+                <h3 class="text-center text-white bg-dark">Covid Care Centre</h3>
+                <div class="card-body bg-dark">
                     <form action="/addhospitalinfo" method="post">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="hcode" placeholder="Enter the hospital code" required>
+                            <input type="text" class="form-control mt-2" name="hcode" placeholder="Enter the hospital code" required>
                         </div>
-                        <br>
+                        
                         <div class="form-group">
-                            <input type="text" class="form-control" name="hname" placeholder="Enter the hospital name" required>
+                            <input type="text" class="form-control mt-2" name="hname" placeholder="Enter the hospital name" required>
                         </div>
-                        <br>
+                       
                         <div class="form-group">
-                            <input type="number" class="form-control" name="normalbed" placeholder="Enter number of normal beds available" required>
+                            <input type="number" class="form-control mt-2" name="normalbed" placeholder="Enter number of normal beds available" required>
                         </div>
-                        <br>
+                        
                         <div class="form-group">
-                            <input type="number" class="form-control" name="hicubed" placeholder="Enter number of H.I.C.U beds available" required>
+                            <input type="number" class="form-control mt-2" name="hicubed" placeholder="Enter number of H.I.C.U beds available" required>
                         </div>
-                        <br>
+                       
                         <div class="form-group">
-                            <input type="number" class="form-control" name="icubed" placeholder="Enter number of I.C.U beds available" required>
+                            <input type="number" class="form-control mt-2" name="icubed" placeholder="Enter number of I.C.U beds available" required>
                         </div>
-                        <br>
+                        
                         <div class="form-group">
-                            <input type="number" class="form-control" name="ventbed" placeholder="Enter number of Ventilator beds available" required>
-                        </div>
-                        <br><br>
-                        <button class="btn btn-info" type="submit">Add</button>
+                            <input type="number" class="form-control mt-2" name="ventbed" placeholder="Enter number of Ventilator beds available" required>
+                        </div><br>
+                        <div class="text-center"> <!-- Center aligns the button -->
+                            <button class="btn btn-info" type="submit">Add</button>
+                          </div>
                     </form>
                 </div>
             </div>
@@ -52,7 +53,7 @@
             <div class="card mb-3" >
                 <div class="row g-0">
                   <div class="col-md-4">
-                    <img src="../../static/assets/img/bedimg2.jpg" class="img-fluid rounded-start" alt="..." style="width: 600px; height: 500px;">
+                    <img src="../../static/assets/img/bedimg2.jpg" class="img-fluid rounded-start" alt="..." style="width: 600px; height: 445px;">
                   </div>
                   <div class="col-md-8">
                     <div class="card-body bg-dark">
@@ -66,7 +67,7 @@
                           <li class="list-group-item">Number of I.C.U beds available: <b>{{postsdata.icubed}}</b></li>
                           <li class="list-group-item">Number of Ventilator beds available: <b>{{postsdata.vbed}}</b></li>
                         </ul><br>
-                        <ul class="list-group list-group-flush">
+                        <ul class="list-group list-group-flush text-center">
                             <li class="list-group-item">Edit : <a href="/hedit/{{postsdata.id}}"><i class="fa-solid fa-pen-to-square"></i></a></li>
                             <li class="list-group-item">Delete : <a href="/hdelete/{{postsdata.id}}"><i class="fa-solid fa-trash"></i></a></li>                           
                         </ul>
