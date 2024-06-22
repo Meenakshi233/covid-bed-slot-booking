@@ -1,6 +1,7 @@
 {% extends "navbar.html" %}
 {% block title %} Slot Booking {% endblock title %}
 {% block body %}<br><br><br><br><br><br>
+<div class="bg-light">
 <div class="container" mt-4>
     <div class="display-4 text-center text-info"><b>Book your Bed Slot</b></div>
     <br>
@@ -10,10 +11,10 @@
             <div class="card">
                 {% include "message.html" %}
                 <h4 class="text-center text-white bg-dark">Covid Care Centre</h4>
-                <div class="card-body bg-light">
+                <div class="card-body bg-dark">
                     <form action="/slotbooking" method="post">
                         <div class="form-group">
-                            <input type="text" class="form-control mt-2" name="srfid" value="{{current_user.srfid}}" readonly required>
+                            <input type="text" class="form-control mt-2" name="srfid" value="{{ current_user.srfid }}" readonly required>
                         </div>
                         <select id="bedtype" name="bedtype" class="form-control mt-2" required>
                             <option selected>Choose Bed Type</option>
@@ -75,5 +76,6 @@
         
         </div>
     </div>
+</div><br><br>
 </div>
 {% endblock body %}

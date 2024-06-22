@@ -1,15 +1,17 @@
-{% extends 'baselogin.html' %}
+
+{% extends 'navbar.html' %}
 {% block title %} Hospital User {% endblock title %}
-{% block form %}
-<h2>Add Hospital User </h2>
-{% include "message.html" %}
+{% block body %}
+<div class="bg-light">
+<br><br><br><br><br><br>
+<div class="display-4 text-center text-info"><b>Add Hospital User</b></div><br><br><br>
+
 <div class="row">
+
+    <div class="col-md-4"></div>
 <div class="col-md-4">
-
-    <a href="/logoutadmin" class="btn btn-danger">Logout</a></div>
-
-<div class="col-md-4">
-
+    <div class="text-center">{% include "message.html" %}</div>
+    
 <form action="/addHospitalUser" method="post">
 
 <div class="form-group">
@@ -25,17 +27,21 @@
 </div>
 
 <br>
-<button type="submit" class="btn btn-info">Add</button>
-
+<div class="text-center"><button type="submit" class="btn btn-info">Add</button></div>
 </form>
+<br>
+<div class="text-center"><a href="/logoutadmin" class="btn btn-danger">Logout</a></div>
 
 </div>
-
-
     <div class="col-md-4"></div>
 
 </div>
 
 
+<br><br><br><br>
 
-{% endblock form %}
+</div>
+
+
+
+{% endblock body %}

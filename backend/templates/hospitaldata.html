@@ -1,13 +1,9 @@
 {% extends "navbar.html" %}
 {% block title %} Add Hospital Data {% endblock title %}
-{% block body %}
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+{% block body %}<br><br><br><br><br><br>
+<div class="bg-secondary">
 <div class="container" mt-4>
+   
     <div class="display-4 text-center text-info"><b>Add Hospital Data</b></div>
     <br>
     <div class="row">
@@ -69,7 +65,7 @@
                         </ul><br>
                         <ul class="list-group list-group-flush text-center">
                             <li class="list-group-item">Edit : <a href="/hedit/{{postsdata.id}}"><i class="fa-solid fa-pen-to-square"></i></a></li>
-                            <li class="list-group-item">Delete : <a href="/hdelete/{{postsdata.id}}"><i class="fa-solid fa-trash"></i></a></li>                           
+                            <li class="list-group-item">Delete : <a class="ml-4"   href="/hdelete/{{postsdata.id}}" onclick="return confirm('Are you sure you want to delete the data?');"><i class="fa-solid fa-trash"></i></a></li>                           
                         </ul>
                       </div>
                     </div>
@@ -80,6 +76,7 @@
             </div>
 
         </div>
+    </div>
     </div>
 </div>
 {% endblock body %}

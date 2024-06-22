@@ -46,62 +46,71 @@
     </div>
   </div>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center">
-
-      <a href="/" class="logo me-auto"><i class="fa-solid fa-bed"></i> <b>Bed Connect</b></a>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <h1 class="logo me-auto"><a href="index.html">Medicio</a></h1> -->
-
-      <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
-          <li><a class="nav-link scrollto " href="/">Home</a></li>
-
-          <li><a class="nav-link scrollto" href="/pdetails">Patients Details</a></li>
-          <li><a class="nav-link scrollto" href="/slotbooking">Available Beds</a></li>
-
-          {% if current_user.is_authenticated  and current_user.hcode %}
-
-          <li class="dropdown"><a href="/login"><span>Welcome {{current_user.email}}</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-
-              <li><a href="/addhospitalinfo">Add Hospital Data</a></li>
-              <li><a href="/logouthospitaluser">Logout</a></li>
-      
-           
-            </ul>
-          </li>
-{% elif current_user.is_authenticated and current_user.srfid %}
-           <li class="dropdown"><a href="/login"><span>Welcome {{current_user.email}}</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-
-              <li><a href="/slotbooking">Book Slot</a></li>
-              <li><a href="/logout">Logout</a></li>
-      
-           
-            </ul>
-          </li>
-{% else %}
-          <li class="dropdown"><a href="/login"><span>Sign In</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="/login">User Login</a></li>
-              <li><a href="/hospitallogin">Hospital Login</a></li>
-              <li><a href="/admin">Admin Login</a></li>
-           
-            </ul>
-          </li>
-{% endif %}
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav>
-      <!-- .navbar -->
-
-      <a href="/slotbooking" class="appointment-btn scrollto"><span class="d-none d-md-inline">Bed Booking Slot</span> Book Now</a>
-
-    </div>
-  </header><!-- End Header -->
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+      <div class="container d-flex align-items-center">
+  
+        <a href="/" class="logo me-auto"><i class="fa-solid fa-bed"></i> <b>Bed Connect</b></a>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <h1 class="logo me-auto"><a href="index.html">Medicio</a></h1> -->
+  
+        <nav id="navbar" class="navbar order-last order-lg-0">
+          <ul>
+            <li><a class="nav-link scrollto " href="/">Home</a></li>
+  
+            <li><a class="nav-link scrollto" href="/pdetails">Patients Details</a></li>
+            <li><a class="nav-link scrollto" href="/slotbooking">Available Beds</a></li>
+            <li><a class="nav-link scrollto" href="/triggers">Operations</a></li>
+  
+  {% if current_user.is_authenticated  and current_user.hcode %}
+  
+            <li class="dropdown"><a href="/login"><span>Welcome {{current_user.email}}</span> <i class="bi bi-chevron-down"></i></a>
+              <ul>
+  
+                <li><a href="/addhospitalinfo">Add Hospital Data</a></li>
+                <li><a href="/logout">Logout</a></li>
+        
+             
+              </ul>
+            </li>
+  {% elif session.get('is_admin') %}
+            <li class="dropdown">
+                <a href="#"><span>Welcome {{ session.get('admin_user') }}</span> <i class="bi bi-chevron-down"></i></a>
+                <ul>
+                    <!-- <li><a href="//addHospitalUser">Add Hospital User</a></li> -->
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </li>
+  {% elif current_user.is_authenticated and current_user.srfid %}
+             <li class="dropdown"><a href="/login"><span>Welcome {{current_user.email}}</span> <i class="bi bi-chevron-down"></i></a>
+              <ul>
+  
+                <li><a href="/slotbooking">Book Slot</a></li>
+                <li><a href="/logout">Logout</a></li>
+        
+             
+              </ul>
+            </li>
+  {% else %}
+            <li class="dropdown"><a href="/login"><span>Sign In</span> <i class="bi bi-chevron-down"></i></a>
+              <ul>
+                <li><a href="/login">User Login</a></li>
+                <li><a href="/hospitallogin">Hospital Login</a></li>
+                <li><a href="/admin">Admin Login</a></li>
+             
+              </ul>
+            </li>
+  
+  {% endif %}
+            <!-- <li><a class="nav-link scrollto" href="#contact">Contact</a></li> -->
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+  
+        <a href="/slotbooking" class="appointment-btn scrollto"><span class="d-none d-md-inline">Book your Bed Now</a>
+  
+      </div>
+    </header><!-- End Header -->
 
   <main id="main">
   {% block body %}
