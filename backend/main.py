@@ -240,7 +240,7 @@ def hospitalUser():
         flash("You need to be logged in to access this", "danger")
         return redirect(url_for('admin'))
     else:
-        query=db.engine.execute(f"SLECT * FROM `trig`")
+        query=db.engine.execute(f"SELECT * FROM `trig`")
         if request.method=="POST":
             hcode=request.form.get('hcode')
             email=request.form.get('email')
