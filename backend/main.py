@@ -233,40 +233,96 @@ def logout():
     return redirect(url_for('login'))
 
 # Add hospital user page routing
-@app.route('/addHospitalUser',methods=['POST','GET'])
-def hospitalUser():
+# @app.route('/addHospitalUser',methods=['POST','GET'])
+# def hospitalUser():
 
+#     if not session.get('is_admin'):
+#         flash("You need to be logged in to access this", "danger")
+#         return redirect(url_for('admin'))
+#     else:
+#         query=db.engine.execute(f"SELECT * FROM `trig`")
+#         if request.method=="POST":
+#             hcode=request.form.get('hcode')
+#             email=request.form.get('email')
+#             password=request.form.get('password')        
+#             encpassword = generate_password_hash(password)
+#             hcode=hcode.upper()      
+#             emailUser=Hospitaluser.query.filter_by(email=email).first()
+#             if emailUser:
+#                 flash("Email is already taken","warning")
+#                 return render_template("addHosUser.html")
+#             else:
+#                 query=Hospitaluser(hcode=hcode,email=email,password=password)
+#                 db.session.add(query)
+#                 db.session.commit()
+#                 try:
+#                     mail.send_message('covid care center',
+#                                             sender=params['gmail-user'],
+#                                             recipients=[email],
+#                                             body=f"Welcome! Thanks for choosing us\nYour Login credentials are\nEmail Address: {email}\nPassword: {password}\nHospital Code: {hcode} \n\nDo not share your password\n\nThank you")
+#                     flash("Data Sent and Inserted Successfully", "warning")
+#                 except Exception as e:
+#                     flash(f"Failed to send email: {e}", "danger")
+#                 return render_template("addHosUser.html",query=query)
+#         else:
+#             # flash("Login and try Again","warning")
+#             return render_template("admin.html")
+@app.route('/addHospitalUser', methods=['POST', 'GET'])
+def hospitalUser():
     if not session.get('is_admin'):
         flash("You need to be logged in to access this", "danger")
         return redirect(url_for('admin'))
-    else:
-        query=db.engine.execute(f"SELECT * FROM `trig`")
-        if request.method=="POST":
-            hcode=request.form.get('hcode')
-            email=request.form.get('email')
-            password=request.form.get('password')        
-            encpassword = generate_password_hash(password)
-            hcode=hcode.upper()      
-            emailUser=Hospitaluser.query.filter_by(email=email).first()
-            if emailUser:
-                flash("Email is already taken","warning")
-                return render_template("addHosUser.html")
-            else:
-                query=Hospitaluser(hcode=hcode,email=email,password=password)
-                db.session.add(query)
-                db.session.commit()
-                try:
-                    mail.send_message('covid care center',
-                                            sender=params['gmail-user'],
-                                            recipients=[email],
-                                            body=f"Welcome! Thanks for choosing us\nYour Login credentials are\nEmail Address: {email}\nPassword: {password}\nHospital Code: {hcode} \n\nDo not share your password\n\nThank you")
-                    flash("Data Sent and Inserted Successfully", "warning")
-                except Exception as e:
-                    flash(f"Failed to send email: {e}", "danger")
-                return render_template("addHosUser.html",query=query)
-        else:
-            # flash("Login and try Again","warning")
-            return render_template("admin.html")
+    
+    # Fetch records from `trig` table
+    try:
+        # Use a connection object to execute the query
+        with db.engine.connect() as connection:
+            query = connection.execute(text("SELECT * FROM `trig`"))
+            trig_records = query.fetchall()  # Fetch all results
+    except Exception as e:
+        flash(f"Failed to fetch records: {e}", "danger")
+        return render_template("admin.html")
+    
+    if request.method == "POST":
+        hcode = request.form.get('hcode').upper()
+        email = request.form.get('email')
+        password = request.form.get('password')
+        encpassword = generate_password_hash(password)
+        
+        # Check if the email already exists
+        emailUser = Hospitaluser.query.filter_by(email=email).first()
+        if emailUser:
+            flash("Email is already taken", "warning")
+            return render_template("addHosUser.html", trig_records=trig_records)
+        
+        # Add new hospital user
+        new_hospital_user = Hospitaluser(hcode=hcode, email=email, password=encpassword)
+        db.session.add(new_hospital_user)
+        db.session.commit()
+        
+        # Send email notification
+        try:
+            mail.send_message(
+                'Covid Care Center',
+                sender=params['gmail-user'],
+                recipients=[email],
+                body=(
+                    f"Welcome! Thanks for choosing us\n"
+                    f"Your Login credentials are:\n"
+                    f"Email Address: {email}\n"
+                    f"Password: {password}\n"
+                    f"Hospital Code: {hcode}\n\n"
+                    f"Do not share your password\n\nThank you"
+                )
+            )
+            flash("Data sent and inserted successfully", "success")
+        except Exception as e:
+            flash(f"Failed to send email: {e}", "danger")
+        
+        return render_template("addHosUser.html", trig_records=trig_records)
+    
+    return render_template("addHosUser.html", trig_records=trig_records)
+
     
 # test page routing    
 @app.route("/test")
